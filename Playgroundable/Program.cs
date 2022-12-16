@@ -1,3 +1,3 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using Playgroundable;
 
-Console.WriteLine("Hello, World!");
+Console.WriteLine(Brabras.Sum(5,6));
