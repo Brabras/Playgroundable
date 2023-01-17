@@ -40,6 +40,7 @@ builder.RegisterAssemblyModules(Assembly.GetExecutingAssembly());
 //     }
 // }
 
+
 var container = builder.Build();
 
 var handler = container.Resolve<CommandHandler>();
