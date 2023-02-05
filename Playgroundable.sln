@@ -2,9 +2,11 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TgBot", "TgBot\TgBot.csproj", "{7FAFED44-0776-4CF1-8A1C-CDF32F2EEBAD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsolePlayground", "ConsolePlayground\ConsolePlayground.csproj", "{C24692EC-AC37-43E2-81D2-C25EA6A8AFBB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpRequestPlayground", "HttpRequestPlayground\HttpRequestPlayground.csproj", "{C24692EC-AC37-43E2-81D2-C25EA6A8AFBB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutofacPlaygroundable", "AutofacPlaygroundable\AutofacPlaygroundable.csproj", "{5905AA8C-414C-48E0-8243-3DAB9C702A7F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsolePlayground", "ConsolePlayground\ConsolePlayground.csproj", "{3225312E-5E1B-48C7-9C5C-85DF9944025A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,5 +26,9 @@ Global
 		{5905AA8C-414C-48E0-8243-3DAB9C702A7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5905AA8C-414C-48E0-8243-3DAB9C702A7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5905AA8C-414C-48E0-8243-3DAB9C702A7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3225312E-5E1B-48C7-9C5C-85DF9944025A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3225312E-5E1B-48C7-9C5C-85DF9944025A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3225312E-5E1B-48C7-9C5C-85DF9944025A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3225312E-5E1B-48C7-9C5C-85DF9944025A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
