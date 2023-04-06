@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsolePlayground", "Consol
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggingPlayground", "LoggingPlayground\LoggingPlayground.csproj", "{7275A0A6-7F20-47AD-9F7A-22C4BA732504}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FfmpegPlayground", "FfmpegPlayground\FfmpegPlayground.csproj", "{8E4585D8-3397-4FD1-8E23-82545BF44E26}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{7275A0A6-7F20-47AD-9F7A-22C4BA732504}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7275A0A6-7F20-47AD-9F7A-22C4BA732504}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7275A0A6-7F20-47AD-9F7A-22C4BA732504}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E4585D8-3397-4FD1-8E23-82545BF44E26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E4585D8-3397-4FD1-8E23-82545BF44E26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E4585D8-3397-4FD1-8E23-82545BF44E26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E4585D8-3397-4FD1-8E23-82545BF44E26}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
