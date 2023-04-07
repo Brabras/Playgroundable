@@ -1,19 +1,10 @@
-﻿FROM mcr.microsoft.com/dotnet/runtime:6.0 AS base
+﻿FROM mcr.microsoft.com/dotnet/runtime:6.0
+
 WORKDIR /app
 
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
-WORKDIR /src
-COPY ["FfmpegPlayground/FfmpegPlayground.csproj", "FfmpegPlayground/"]
-RUN dotnet restore "FfmpegPlayground/FfmpegPlayground.csproj"
-COPY . .
-WORKDIR "/src/FfmpegPlayground"
-RUN dotnet build "FfmpegPlayground.csproj" -c Release -o /app/build
+RUN apt-get -y update && apt-get -y upgrade 
+RUN apt-get install -y ffmpeg
 
-FROM build AS publish
-RUN dotnet publish "FfmpegPlayground.csproj" -c Release -o /app/publish
+COPY ./bin/Release/net6.0/publish /app/
 
-FROM base AS final
-WORKDIR /app
-COPY --from=publish /app/publish .
-RUN sudo apt-get install -y ffmpeg libgdiplus
 ENTRYPOINT ["dotnet", "FfmpegPlayground.dll"]
