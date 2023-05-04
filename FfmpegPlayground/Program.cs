@@ -31,7 +31,7 @@ try
 
     var info = await FFProbe.AnalyseAsync(inputPath);
     var videoStream = info.PrimaryVideoStream;
-        
+
     if (videoStream is not null)
     {
         Console.WriteLine($"Width: {videoStream.Width}");
