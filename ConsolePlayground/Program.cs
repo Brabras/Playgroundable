@@ -18,4 +18,6 @@
         Console.WriteLine($"3: {c}");
     }
 }
+
 Console.WriteLine("запись из ветки playing");
+Console.WriteLine("запись из ветки playing-again");
