@@ -1,9 +1,10 @@
 ﻿using FFMpegCore;
 using FFMpegCore.Arguments;
 using FFMpegCore.Enums;
+using FFMpegCore.Pipes;
 
-var inputPath = "./videos/TestVideoBefore.mp4";
-var outputPath = "./videos/TestVideoAfter.mp4";
+var inputPath = "../../../TestVideos/TestVideoBefore.mp4";
+var outputPath = "../../../TestVideos/TestVideoAfter.mp4";
 
 var text1 = @"
 Осмонкулов
@@ -27,6 +28,8 @@ var text4 = @"
 
 try
 {
+    var inputStream = File.OpenRead(inputPath);
+
     var targetSize = VideoSize.Original;
 
     var info = await FFProbe.AnalyseAsync(inputPath);
@@ -46,7 +49,7 @@ try
     }
 
     await FFMpegArguments
-        .FromFileInput(inputPath)
+        .FromPipeInput(new StreamPipeSource(inputStream))
         .OutputToFile(outputPath, true, options => options
             .ForceFormat("mp4")
             .WithVideoFilters(filterOptions => filterOptions
