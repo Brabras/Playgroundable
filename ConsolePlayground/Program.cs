@@ -1,23 +1,13 @@
-﻿for (var i = 20; i < 20_000_000; i++)
-{
-    decimal walletAmount = i;
+﻿using ConsolePlayground;
 
-    //Console.WriteLine($"client want to send: {walletAmount}");
+var example = new Example(1);
 
-    var a = (walletAmount - walletAmount / 100M) * 100M;
-    var walletShouldSend = Math.Round(a / 95M, 2);
+var brabras = example.ToBrabrasExt();
 
-    //Console.WriteLine($"wallet should send: {walletShouldSend}");
+Console.WriteLine(brabras);
 
-    var b = walletShouldSend - walletShouldSend / 100 * 5;
-    var c = walletAmount - walletAmount / 100;
+Example example1 = null;
 
-    if (Math.Abs(b - c) >= 0.01M) {
-        Console.WriteLine($"2: {walletAmount}");
-        Console.WriteLine($"2: {b}");
-        Console.WriteLine($"3: {c}");
-    }
-}
+var bras = example1.ToBrabrasExt();
 
-Console.WriteLine("запись из ветки playing");
-Console.WriteLine("запись из ветки playing-again");
+Console.WriteLine(brabras);
