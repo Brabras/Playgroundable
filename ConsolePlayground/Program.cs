@@ -1,79 +1,56 @@
-﻿using ConsolePlayground;
+﻿Object dateTimeString = "01/01/1753 08:00:00";
+Object timeString = "08:00:00"; 
+var dtStrValue = Convert.ToString(dateTimeString)!;
+var toStrValue = Convert.ToString(timeString)!;
+var dresult = TimeOnly.ParseExact(dtStrValue, "HH:mm:ss");
+var tresult = TimeOnly.ParseExact(toStrValue, "HH:mm:ss");
+Console.WriteLine(dresult);
+Console.WriteLine(tresult);
 
-var testNode1 = Solution.MakeNode(249);
-
-var testNode2 = Solution.MakeNode(5649);
-
-var result = Solution.AddTwoNumbers(testNode1, testNode2);
-
-var firstNumber = result.val;
-Console.Write(firstNumber);
-
-while (result.next is not null)
-{
-    var num = result.next.val;
-    firstNumber = firstNumber * 10 + num;
-    result = result.next;
-    Console.Write(firstNumber % 10);
-}
-
-
-
-public class Solution
-{
-    public static ListNode MakeNode(int number)
-    {
-        ListNode? result = null;
-        while (number != 0)
-        {
-            var newNode = new ListNode(number % 10, result);
-            result = newNode;
-            number /= 10;
-        }
-
-        return result!;
-    }
-    
-    public static ListNode AddTwoNumbers(ListNode l1, ListNode l2)
-    {
-        var firstNumber = l1.val;
-        Console.Write(firstNumber);
-
-        double tenIndex = 1;
-        while (l1.next is not null)
-        {
-            var num = l1.next.val;
-            firstNumber = int(firstNumber + Math.Pow(10D, tenIndex) * num);
-            l1 = l1.next;
-            tenIndex++;
-            Console.Write(firstNumber % 10);
-        }
-
-        var secondNumber = l2.val;
-        Console.WriteLine();
-        Console.Write(secondNumber);
-
-        while (l2.next is not null)
-        {
-            var num = l2.next.val;
-            secondNumber = secondNumber * 10 + num;
-            l2 = l2.next;
-            Console.Write(secondNumber % 10);
-        }
-
-        var thirdNumber = firstNumber + secondNumber;
-
-        var firstNode = new ListNode(thirdNumber % 10);
-        thirdNumber /= 10;
-        var currentNode = firstNode;
-        while (thirdNumber != 0)
-        {
-            var lastNode = new ListNode(thirdNumber % 10);
-            currentNode.next = lastNode;
-            currentNode = lastNode;
-            thirdNumber /= 10;
-        }
-
-        return firstNode;
-    }
-}
+Console.WriteLine();
+// using System.Data;
+//
+// var testArr = new int[3][];
+// testArr[0] = new[] { 0, 0, 0 };
+// testArr[1] = new[] { 0, 0, 0 };
+// testArr[2] = new[] { 0, 0, 0 };
+// Console.WriteLine(testArr.Length);
+//
+// var result = Solution.UpdateMatrix(testArr);
+//
+// foreach (var arr in result)
+// {
+//     Console.WriteLine(string.Join(' ', arr));
+// }
+//
+// public class Solution
+// {
+//     private enum Direction
+//     {
+//         Up,
+//         Down,
+//         Left,
+//         Right
+//     }
+//
+//     public int[][] UpdateMatrix(int[][] mat)
+//     {
+//         var result = mat;
+//         for (var i = 0; i < mat.Length; i++)
+//         {
+//             for (var j = 0; j < mat[i].Length; j++)
+//             {
+//                 result[i][j] = Update(mat[i][j], i, j);
+//             }
+//         }
+//     }
+//
+//     private static int Update(int value, int i, int j)
+//     {
+//         if (value == 0)
+//             return 0;
+//         
+//     }
+//     
+//     private static f
+// }
