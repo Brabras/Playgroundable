@@ -14,6 +14,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FfmpegPlayground", "FfmpegP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BenchmarkPlayground", "BenchmarkPlayground\BenchmarkPlayground.csproj", "{AD8D2872-10AD-4ED0-999A-9EF7D4DD8EB0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentNHibernatePlayground", "FluentNHibernatePlayground\FluentNHibernatePlayground.csproj", "{50EDBD8A-0A5E-48EE-A9BA-BA490D852F64}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.DataAccess", "Infrastructure.DataAccess\Infrastructure.DataAccess.csproj", "{097D690B-C845-4B16-9E6C-3846AD53C4F1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,5 +52,13 @@ Global
 		{AD8D2872-10AD-4ED0-999A-9EF7D4DD8EB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD8D2872-10AD-4ED0-999A-9EF7D4DD8EB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD8D2872-10AD-4ED0-999A-9EF7D4DD8EB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50EDBD8A-0A5E-48EE-A9BA-BA490D852F64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50EDBD8A-0A5E-48EE-A9BA-BA490D852F64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50EDBD8A-0A5E-48EE-A9BA-BA490D852F64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50EDBD8A-0A5E-48EE-A9BA-BA490D852F64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{097D690B-C845-4B16-9E6C-3846AD53C4F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{097D690B-C845-4B16-9E6C-3846AD53C4F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{097D690B-C845-4B16-9E6C-3846AD53C4F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{097D690B-C845-4B16-9E6C-3846AD53C4F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

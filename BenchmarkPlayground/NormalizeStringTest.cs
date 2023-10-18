@@ -9,7 +9,7 @@ public class NormalizeStringTest
     private const int MaxRowLength = 20;
     private const string Example = "123123 1312312312asdasasdasdasd 132123132 234 12312313";
 
-    [Benchmark]
+    [Benchmark(Baseline = true)]
     public string NormalizeStringWithStringList()
     {
         var words = Example.Split(' ');
@@ -40,7 +40,7 @@ public class NormalizeStringTest
     public string NormalizeStringWithStringBuilder()
     {
         var words = Example.Trim().Split(' ');
-        var sb = new StringBuilder();
+        var sb = new StringBuilder(255);
         var currentRowLength = 0;
         var isFirstWord = true;
         foreach (var word in words)
