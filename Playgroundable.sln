@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentNHibernatePlayground"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.DataAccess", "Infrastructure.DataAccess\Infrastructure.DataAccess.csproj", "{097D690B-C845-4B16-9E6C-3846AD53C4F1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlPlayground", "XmlPlayground\XmlPlayground.csproj", "{AE672C11-B828-4D57-9F98-C6A9949DFECF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -60,5 +62,9 @@ Global
 		{097D690B-C845-4B16-9E6C-3846AD53C4F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{097D690B-C845-4B16-9E6C-3846AD53C4F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{097D690B-C845-4B16-9E6C-3846AD53C4F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE672C11-B828-4D57-9F98-C6A9949DFECF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE672C11-B828-4D57-9F98-C6A9949DFECF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE672C11-B828-4D57-9F98-C6A9949DFECF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE672C11-B828-4D57-9F98-C6A9949DFECF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

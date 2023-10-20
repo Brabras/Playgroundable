@@ -9,10 +9,10 @@ public class MonitoringListTransformMap : ClassMap<MonitoringListTransform>
         Schema("test");
 
         Id(x => x.Id);
-
+        
         Map(x => x.TransformXslt);
 
-        Map(x => x.IsSelected);
+        Map(x => x.IsActive);
 
         HasMany(x => x.Replacements)
             .Schema("test")
@@ -20,5 +20,11 @@ public class MonitoringListTransformMap : ClassMap<MonitoringListTransform>
             .KeyColumn("monitoring_list_transform_id")
             .OrderBy("sort_order")
             .Cascade.AllDeleteOrphan();
+        
+        HasManyToMany(x => x.MonitoringLists)
+            .Schema("test")
+            .Table("lists_transforms")
+            .ParentKeyColumn("transform_id")
+            .ChildKeyColumn("monitoring_list_id");
     }
 }

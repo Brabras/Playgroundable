@@ -43,8 +43,3 @@
 // numbersList2.Append<List<long>>(numbersList);
 //
 // Console.WriteLine(string.Join(",", numbersList2));
-
-using System.Text.Json;
-
-var list = new List<string>
-JsonSerializer.Serialize()

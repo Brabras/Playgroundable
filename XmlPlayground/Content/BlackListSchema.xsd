@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:element name="BlackList">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Entry" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:all>
+                            <xs:element name="Main" type="xs:string"/>
+                            <xs:element name="DateOfBirth" type="xs:string"/>
+                            <xs:element name="ListedDateInfo" type="xs:string"/>
+                            <xs:element name="Aliases" minOccurs="0">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="Alias" maxOccurs="unbounded" type="xs:string" minOccurs="0"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:all>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
