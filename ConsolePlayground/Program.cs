@@ -31,15 +31,15 @@
 // }
 //
 // Console.WriteLine(result);
-//
-// var sst = "asd";
-// var st = $"{null}{sst}";
-// Console.WriteLine(st);
 
-// var numbersList = new List<long> { 1, 2, 3 };
-//
-// var numbersList2 = new List<long> { 4, 5, 6 };
-//
-// numbersList2.Append<List<long>>(numbersList);
-//
-// Console.WriteLine(string.Join(",", numbersList2));
+var sst = "asd";
+var st = $"{null}{sst}";
+Console.WriteLine(st);
+
+var numbersList = new List<long> { 1, 2, 3 };
+
+var numbersList2 = new List<long> { 4, 5, 6 };
+
+var num = numbersList2.First(x => x == 2);
+
+Console.WriteLine(num);

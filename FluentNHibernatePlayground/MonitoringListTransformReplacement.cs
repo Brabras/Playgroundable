@@ -1,34 +1,43 @@
-﻿using CSharpFunctionalExtensions;
-using JetBrains.Annotations;
+using System.Text.RegularExpressions;
 
 namespace FluentNHibernatePlayground;
 
-[UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
-public class MonitoringListTransformReplacement : Entity
+public class MonitoringListTransformReplacement
 {
-    public virtual MonitoringListTransform MonitoringListTransform { get; protected init; } = null!;
+    private const RegexOptions Options = RegexOptions.Multiline | RegexOptions.Compiled;
+    
+    public string Pattern { get; protected set; } = null!;
 
-    public virtual string OldValue { get; protected init; } = null!;
+    public string Value { get; protected set; } = null!;
 
-    public virtual string NewValue { get; protected init; } = null!;
-
-    public virtual long SortOrder { get; protected init; }
+    private Regex? _regexPattern;
 
     protected MonitoringListTransformReplacement()
     {
     }
 
-    internal static MonitoringListTransformReplacement Create(MonitoringListTransform transform,
-        string oldValue,
-        string newValue,
-        long sortOrder)
+    public string Replace(string xml)
+    {
+        var regex = GetRegex();
+
+        regex.Replace(xml, Value);
+        
+        return xml;
+    }
+
+    private Regex GetRegex()
+    {
+        return _regexPattern ??= new Regex(Pattern, Options);
+    }
+    
+    public static MonitoringListTransformReplacement Create(string pattern,
+                                                            string value)
     {
         return new MonitoringListTransformReplacement
         {
-            MonitoringListTransform = transform,
-            OldValue = oldValue,
-            NewValue = newValue,
-            SortOrder = sortOrder
+            _regexPattern = new Regex(pattern, Options),
+            Pattern       = pattern,
+            Value         = value
         };
     }
 }

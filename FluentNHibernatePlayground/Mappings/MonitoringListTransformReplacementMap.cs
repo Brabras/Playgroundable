@@ -1,21 +1,15 @@
 ﻿using FluentNHibernate.Mapping;
+using JetBrains.Annotations;
 
 namespace FluentNHibernatePlayground.Mappings;
 
-public class MonitoringListTransformReplacementMap : ClassMap<MonitoringListTransformReplacement>
+[UsedImplicitly]
+public sealed class MonitoringListTransformReplacementMap : ComponentMap<MonitoringListTransformReplacement>
 {
     public MonitoringListTransformReplacementMap()
     {
-        Schema("test");
+        Map(x => x.Pattern);
 
-        Id(x => x.Id);
-
-        References(x => x.MonitoringListTransform);
-
-        Map(x => x.OldValue);
-
-        Map(x => x.NewValue);
-
-        Map(x => x.SortOrder);
+        Map(x => x.Value);
     }
 }
