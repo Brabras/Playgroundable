@@ -1,0 +1,6 @@
+@Asp.NetPlayground_HostAddress = http://localhost:5190
+
+GET {{Asp.NetPlayground_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
