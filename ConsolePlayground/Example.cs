@@ -4,6 +4,8 @@ public class Example
 {
     public long Id { get; set; }
 
+    public string? Name { get; set; }
+
     public Example(long id)
     {
         Id = id;

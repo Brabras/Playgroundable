@@ -27,6 +27,14 @@ services:
       - "minio-data:/var/lib/minio/data"
     networks:
       - playgroundable-net
+  redis:
+    image: redis:5
+    container_name: playgroundable-redis
+    hostname: redis
+    networks:
+      - playgroundable-net
+    ports:
+      - 6383:6379
 networks:
   playgroundable-net:
     driver: bridge
