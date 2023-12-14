@@ -1,75 +1,138 @@
-﻿var random = new Random();
+﻿using System.IO.Compression;
+using ConsolePlayground;
 
-var initialSatiety = random.Next(1, 21);
-var desiredSatiety = random.Next(11, 31);
-var thirstLevel    = random.Next(1, 11);
-var maxThirstLevel = 11;
+var draft = new FormDraft();
+
+var form = new Form();
 
 
-var currentSatiety = initialSatiety;
-var currentThirst  = thirstLevel;
-Console.WriteLine($"Начальный уровень сытости кота {initialSatiety}");
-Console.WriteLine($"Желаемый уровень сытости кота {desiredSatiety}");
-Console.WriteLine($"Начальный уровень жажды кота {thirstLevel}");
+form.Update(draft, true);
 
-while (currentSatiety < desiredSatiety)
+public interface IIdentityDocument
 {
-    Console.WriteLine("Введите название еды: ");
-    var foodName = Console.ReadLine();
-    int foodValue;
-    int thirstValue;
+    string Name { get; }
 
+    string Surname { get; }
+}
 
-    switch (foodName)
+public class IdentityDocument : IIdentityDocument
+{
+    public string Name { get; private set; } = null!;
+
+    public string Surname { get; private set; } = null!;
+
+    private IdentityDocument()
     {
-        case "рыба":
-            foodValue   = 3;
-            thirstValue = 1;
-            break;
-        case "курица":
-            foodValue   = 4;
-            thirstValue = 2;
-            break;
-        case "мясо":
-            foodValue   = 5;
-            thirstValue = 3;
-            break;
-        case "вода":
-            foodValue   = 0;
-            thirstValue = -3;
-            break;
+    }
 
-        default:
+    public static IdentityDocument Create(IIdentityDocument identityDocument)
+    {
+        return new IdentityDocument
         {
-            Console.WriteLine("Доступный выбор: курица, мясо, рыба, вода");
-            continue;
-        }
-    }
-
-    currentSatiety += foodValue;
-    currentThirst  += thirstValue;
-
-    Console.WriteLine($"Кот поел {foodName}. Текущий уровень сытости {currentSatiety}");
-    Console.WriteLine($"Текущий уровень жажды {currentThirst}");
-
-
-    if (maxThirstLevel < currentThirst)
-    {
-        Console.WriteLine("Кот хочет пить");
-    }
-
-    else if (initialSatiety >= desiredSatiety)
-    {
-        break;
+            Name    = identityDocument.Name,
+            Surname = identityDocument.Surname
+        };
     }
 }
 
-if (desiredSatiety < currentSatiety)
+public class IdentityDocumentDraft : IIdentityDocument
 {
-    Console.WriteLine("Коту пора на диету");
+    public string Name { get; private set; } = null!;
+
+    public string Surname { get; private set; } = null!;
+
+    private IdentityDocumentDraft()
+    {
+    }
+
+    public static IdentityDocumentDraft Create(IIdentityDocument identityDocument)
+    {
+        return new IdentityDocumentDraft
+        {
+            Name    = identityDocument.Name,
+            Surname = identityDocument.Surname
+        };
+    }
 }
 
-else
+public interface IAddress
 {
-    Console.WriteLine("Кот сыт");
+    string City { get; }
+    string Country { get; }
+}
+
+public class Address : IAddress
+{
+    public string City { get; private set; } = null!;
+
+    public string Country { get; private set; } = null!;
+
+    private Address()
+    {
+    }
+
+    public static Address Create(IAddress address)
+    {
+        return new Address
+        {
+            City    = address.City,
+            Country = address.Country
+        };
+    }
+}
+
+public class AddressDraft : IAddress
+{
+    public string City { get; private set; } = null!;
+
+    public string Country { get; private set; } = null!;
+
+    private AddressDraft()
+    {
+    }
+
+    public static AddressDraft Create(IAddress address)
+    {
+        return new AddressDraft
+        {
+            City    = address.City,
+            Country = address.Country
+        };
+    }
+}
+
+public interface IForm<TId, TA>
+    where TId : IIdentityDocument
+    where TA : IAddress
+{
+    TId IdentityDocument { get; set; }
+    TA Address { get; set; }
+    bool IsSomething { get; set; }
+}
+
+public class FormDraft : IForm<IdentityDocumentDraft, AddressDraft>
+{
+    public IdentityDocumentDraft IdentityDocument { get; set; }
+
+    public AddressDraft Address { get; set; }
+
+    public bool IsSomething { get; set; }
+}
+
+public class Form 
+{
+    public IdentityDocument IdentityDocument { get; set; } = null!;
+
+    public Address Address { get; set; } = null!;
+
+    public bool IsSomething { get; set; }
+
+    public void Update<TIdentityDocument, TAddress>(IForm<TIdentityDocument, TAddress> form, bool isSomething)
+        where TIdentityDocument : IIdentityDocument
+        where TAddress : IAddress
+    {
+        IdentityDocument = IdentityDocument.Create(form.IdentityDocument);
+        Address          = Address.Create(form.Address);
+        IsSomething      = isSomething;
+    }
 }
