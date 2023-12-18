@@ -24,6 +24,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Seedwork", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Asp.NetPlayground", "Asp.NetPlayground\Asp.NetPlayground.csproj", "{EDEE2370-FD76-4212-B2F2-9A76F4883AED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgsPlayground", "AlgsPlayground\AlgsPlayground.csproj", "{79DA61EE-EE76-41C3-8D0B-6B973F3892CE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -78,5 +80,9 @@ Global
 		{EDEE2370-FD76-4212-B2F2-9A76F4883AED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EDEE2370-FD76-4212-B2F2-9A76F4883AED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EDEE2370-FD76-4212-B2F2-9A76F4883AED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79DA61EE-EE76-41C3-8D0B-6B973F3892CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79DA61EE-EE76-41C3-8D0B-6B973F3892CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79DA61EE-EE76-41C3-8D0B-6B973F3892CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79DA61EE-EE76-41C3-8D0B-6B973F3892CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

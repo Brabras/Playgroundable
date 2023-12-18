@@ -96,6 +96,7 @@
 	<s:Boolean x:Key="/Default/Environment/ExternalSources/FirstTimeFormShown/@EntryValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/Environment/Feedback/ShouldPrompt/@EntryValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/Environment/Filtering/HideAutoProperties/@EntryValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/Environment/InlayHints/GeneralInlayHintsOptions/EnableInlayHints/@EntryValue">False</s:Boolean>
 	<s:String x:Key="/Default/Environment/Internet/WebProxy/Hostname/@EntryValue">127.0.0.1</s:String>
 	<s:Boolean x:Key="/Default/Environment/Internet/WebProxy/IsCustomProxy/@EntryValue">True</s:Boolean>
 	<s:Int64 x:Key="/Default/Environment/Internet/WebProxy/Port/@EntryValue">1337</s:Int64>

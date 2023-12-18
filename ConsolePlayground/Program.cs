@@ -1,138 +1,79 @@
-﻿using System.IO.Compression;
-using ConsolePlayground;
-
-var draft = new FormDraft();
-
-var form = new Form();
-
-
-form.Update(draft, true);
-
-public interface IIdentityDocument
+﻿namespace ConsolePlayground
 {
-    string Name { get; }
-
-    string Surname { get; }
-}
-
-public class IdentityDocument : IIdentityDocument
-{
-    public string Name { get; private set; } = null!;
-
-    public string Surname { get; private set; } = null!;
-
-    private IdentityDocument()
+    public class Person
     {
-    }
+        public int Age;
+        public DateTime BirthDate;
+        public string Name;
+        public IdInfo IdInfo;
 
-    public static IdentityDocument Create(IIdentityDocument identityDocument)
-    {
-        return new IdentityDocument
+        public Person ShallowCopy()
         {
-            Name    = identityDocument.Name,
-            Surname = identityDocument.Surname
-        };
-    }
-}
+            return (Person) MemberwiseClone();
+        }
 
-public class IdentityDocumentDraft : IIdentityDocument
-{
-    public string Name { get; private set; } = null!;
-
-    public string Surname { get; private set; } = null!;
-
-    private IdentityDocumentDraft()
-    {
-    }
-
-    public static IdentityDocumentDraft Create(IIdentityDocument identityDocument)
-    {
-        return new IdentityDocumentDraft
+        public Person DeepCopy()
         {
-            Name    = identityDocument.Name,
-            Surname = identityDocument.Surname
-        };
-    }
-}
-
-public interface IAddress
-{
-    string City { get; }
-    string Country { get; }
-}
-
-public class Address : IAddress
-{
-    public string City { get; private set; } = null!;
-
-    public string Country { get; private set; } = null!;
-
-    private Address()
-    {
+            Person clone = (Person) MemberwiseClone();
+            clone.IdInfo = new IdInfo(IdInfo.IdNumber);
+            clone.Name = String.Copy(Name);
+            return clone;
+        }
     }
 
-    public static Address Create(IAddress address)
+    public class IdInfo
     {
-        return new Address
+        public int IdNumber;
+
+        public IdInfo(int idNumber)
         {
-            City    = address.City,
-            Country = address.Country
-        };
-    }
-}
-
-public class AddressDraft : IAddress
-{
-    public string City { get; private set; } = null!;
-
-    public string Country { get; private set; } = null!;
-
-    private AddressDraft()
-    {
+            IdNumber = idNumber;
+        }
     }
 
-    public static AddressDraft Create(IAddress address)
+    class Program
     {
-        return new AddressDraft
+        static void Main()
         {
-            City    = address.City,
-            Country = address.Country
-        };
-    }
-}
+            Person p1 = new Person();
+            p1.Age = 42;
+            p1.BirthDate = Convert.ToDateTime("1977-01-01");
+            p1.Name = "Jack Daniels";
+            p1.IdInfo = new IdInfo(666);
 
-public interface IForm<TId, TA>
-    where TId : IIdentityDocument
-    where TA : IAddress
-{
-    TId IdentityDocument { get; set; }
-    TA Address { get; set; }
-    bool IsSomething { get; set; }
-}
+            // Выполнить поверхностное копирование p1 и присвоить её p2.
+            Person p2 = p1.ShallowCopy();
+            // Сделать глубокую копию p1 и присвоить её p3.
+            Person p3 = p1.DeepCopy();
 
-public class FormDraft : IForm<IdentityDocumentDraft, AddressDraft>
-{
-    public IdentityDocumentDraft IdentityDocument { get; set; }
+            // Вывести значения p1, p2 и p3.
+            Console.WriteLine("Original values of p1, p2, p3:");
+            Console.WriteLine("   p1 instance values: ");
+            DisplayValues(p1);
+            Console.WriteLine("   p2 instance values:");
+            DisplayValues(p2);
+            Console.WriteLine("   p3 instance values:");
+            DisplayValues(p3);
 
-    public AddressDraft Address { get; set; }
+            // Изменить значение свойств p1 и отобразить значения p1, p2 и p3.
+            p1.Age = 32;
+            p1.BirthDate = Convert.ToDateTime("1900-01-01");
+            p1.Name = "Frank";
+            p1.IdInfo.IdNumber = 7878;
+            Console.WriteLine("\nValues of p1, p2 and p3 after changes to p1:");
+            Console.WriteLine("   p1 instance values: ");
+            DisplayValues(p1);
+            Console.WriteLine("   p2 instance values (reference values have changed):");
+            DisplayValues(p2);
+            Console.WriteLine("   p3 instance values (everything was kept the same):");
+            DisplayValues(p3);
+        }
 
-    public bool IsSomething { get; set; }
-}
-
-public class Form 
-{
-    public IdentityDocument IdentityDocument { get; set; } = null!;
-
-    public Address Address { get; set; } = null!;
-
-    public bool IsSomething { get; set; }
-
-    public void Update<TIdentityDocument, TAddress>(IForm<TIdentityDocument, TAddress> form, bool isSomething)
-        where TIdentityDocument : IIdentityDocument
-        where TAddress : IAddress
-    {
-        IdentityDocument = IdentityDocument.Create(form.IdentityDocument);
-        Address          = Address.Create(form.Address);
-        IsSomething      = isSomething;
+        public static void DisplayValues(Person p)
+        {
+            Console.WriteLine("      Name: {0:s}, Age: {1:d}, BirthDate: {2:MM/dd/yy}",
+                p.Name, p.Age, p.BirthDate);
+            Console.WriteLine("      ID#: {0:d}", p.IdInfo.IdNumber);
+        }
     }
 }
