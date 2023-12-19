@@ -1,110 +1,104 @@
-﻿var uncycleGraph = new Dictionary<long, IList<long>>
+﻿namespace AlgsPlayground;
+
+class DijkstraAlgorithm
 {
-    { 1, new List<long> { 2, 3 } },
-    { 2, new List<long> { 4 } },
-    { 3, new List<long> { 5 } },
-    { 4, new List<long> { 5, 6 } },
-    { 5, new List<long> { 6 } },
-    { 6, new List<long> { 7 } }
-};
-
-// Console.WriteLine(Graph.BreadthSearchOfUncycleGraph(uncycleGraph, 7, 1));
-
-var heavyGraph = new Dictionary<long, IDictionary<long, long>>
-{
-    { 1, new Dictionary<long, long> { { 2, 2 }, { 3, 1 } } },
-    { 2, new Dictionary<long, long> { { 6, 7 } } },
-    { 3, new Dictionary<long, long> { { 4, 5 }, { 5, 2 } } },
-    { 4, new Dictionary<long, long> { { 6, 2 } } },
-    { 5, new Dictionary<long, long> { { 6, 1 } } },
-    { 6, new Dictionary<long, long> { { 7, 1 } } },
-    { 7, new Dictionary<long, long>() },
-};
-
-// var dijkstraResult = Graph.Dijkstra(heavyGraph, 1, 7);
-//
-// foreach (var row in dijkstraResult)
-// {
-//     Console.WriteLine($"{row.Key} : {row.Value}");
-// }
-
-static void Dijkstra(int[,] graph)
-{
-    var    V                = graph.GetLength(0);
-    int[]  distance         = new int[V];  // Расстояние от источника до i-й вершины
-    bool[] shortestIncluded = new bool[V]; // Вершины, уже включенные в кратчайший путь
-
-    // Инициализация расстояний и флага посещения вершин
-    for (int i = 0; i < V; i++)
+    static void Main()
     {
-        distance[i]         = int.MaxValue;
-        shortestIncluded[i] = false;
+        // Буквенные ноды
+        char[] nodes = { 'A', 'B', 'C', 'D', 'E', 'F' };
+
+        // Матрица смежности для представления графа
+        int[,] graph = new int[,]
+        {
+            { 0, 2, 0, 0, 0, 5 },
+            { 0, 0, 4, 1, 0, 0 },
+            { 0, 0, 0, 0, 3, 0 },
+            { 0, 0, 0, 0, 0, 1 },
+            { 0, 0, 0, 0, 0, 0 },
+            { 0, 0, 0, 0, 0, 0 }
+        };
+
+        // Найти кратчайшие пути от вершины 0 до всех остальных
+        Dijkstra(graph, 0, nodes);
     }
 
-    // Расстояние от источника до самого себя всегда равно 0
-    distance[0] = 0;
-
-    // Найти кратчайший путь для всех вершин
-    for (int count = 0; count < V - 1; count++)
+    // Функция для нахождения вершины с минимальным расстоянием
+    static int MinDistance(int[] dist, bool[] sptSet, int V)
     {
-        int u = MinDistance(distance, shortestIncluded, V); // Выбрать вершину с минимальным расстоянием
-        shortestIncluded[u] = true;
+        int min = int.MaxValue, minIndex = -1;
 
         for (int v = 0; v < V; v++)
         {
-            // Обновить расстояние, если текущий путь короче
-            if (!shortestIncluded[v]
-                && graph[u, v] != 0
-                && distance[u] != int.MaxValue
-                && distance[u] + graph[u, v] < distance[v])
+            if (!sptSet[v] && dist[v] < min)
             {
-                distance[v] = distance[u] + graph[u, v];
+                min      = dist[v];
+                minIndex = v;
             }
         }
+
+        return minIndex;
     }
 
-    // Вывести результаты
-    PrintSolution(distance, V);
-}
-
-static void PrintSolution(int[] dist, int V)
-{
-    Console.WriteLine("Вершина \t Расстояние от источника");
-
-    for (int i = 0; i < V; i++)
+    // Функция для вывода результатов с буквенными нодами
+    static void PrintSolution(int[] dist, int V, char[] nodes)
     {
-        Console.WriteLine($"{i} \t\t {dist[i]}");
-    }
-}
+        Console.WriteLine("Нода \t Расстояние от источника \t Путь");
 
-static int MinDistance(int[] dist, bool[] sptSet, int V)
-{
-    int min = int.MaxValue, minIndex = -1;
-
-    for (int v = 0; v < V; v++)
-    {
-        if (!sptSet[v] && dist[v] < min)
+        for (int i = 0; i < V; i++)
         {
-            min      = dist[v];
-            minIndex = v;
+            Console.Write($"{nodes[i]} \t\t {dist[i]} \t\t\t ");
+            PrintPath(0, i, nodes);
+            Console.WriteLine();
         }
     }
 
-    return minIndex;
+    // Функция для вывода пути от источника до конечной ноды
+    static void PrintPath(int src, int j, char[] nodes)
+    {
+        if (j == src)
+        {
+            Console.Write($"{nodes[src]} ");
+            return;
+        }
+
+        PrintPath(src, j / 10, nodes);
+        Console.Write($"{nodes[j % 10]} ");
+    }
+
+    // Реализация алгоритма Дейкстры
+    static void Dijkstra(int[,] graph, int src, char[] nodes)
+    {
+        var    nodesLength = nodes.Length;
+        int[]  dist        = new int[nodesLength];  // Расстояние от источника до i-й вершины
+        bool[] sptSet      = new bool[nodesLength]; // Вершины, уже включенные в кратчайший путь
+
+        // Инициализация расстояний и флага посещения вершин
+        for (int i = 0; i < nodesLength; i++)
+        {
+            dist[i]   = int.MaxValue;
+            sptSet[i] = false;
+        }
+
+        // Расстояние от источника до самого себя всегда равно 0
+        dist[src] = 0;
+
+        // Найти кратчайший путь для всех вершин
+        for (int count = 0; count < nodesLength - 1; count++)
+        {
+            int u = MinDistance(dist, sptSet, nodesLength); // Выбрать вершину с минимальным расстоянием
+            sptSet[u] = true;
+
+            for (int v = 0; v < nodesLength; v++)
+            {
+                // Обновить расстояние, если текущий путь короче
+                if (!sptSet[v] && graph[u, v] != 0 && dist[u] != int.MaxValue && dist[u] + graph[u, v] < dist[v])
+                {
+                    dist[v] = dist[u] + graph[u, v];
+                }
+            }
+        }
+
+        // Вывести результаты
+        PrintSolution(dist, nodesLength, nodes);
+    }
 }
-
-// Матрица смежности для представления графа
-int[,] graph =
-{
-    { 0, 2, 0, 0, 0, 5 },
-    { 0, 0, 4, 1, 0, 0 },
-    { 0, 0, 0, 0, 3, 0 },
-    { 0, 0, 0, 0, 0, 1 },
-    { 0, 0, 0, 0, 0, 0 },
-    { 0, 0, 0, 0, 0, 0 }
-};
-
-// Количество вершин в графе
-
-// Найти кратчайшие пути от вершины 0 до всех остальных
-Dijkstra(graph, 0);
