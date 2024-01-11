@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc.Filters;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Asp.NetPlayground;
 
-
 [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class)]
-public sealed class DbSessionAttributeActionFilter : Attribute, IAsyncActionFilter
+public sealed class DbSessionAttributeActionFilter : Attribute, IAsyncActionFilter, IEndpointFilter
 {
     public DbSessionAttributeActionFilter()
     {
@@ -34,5 +34,12 @@ public sealed class DbSessionAttributeActionFilter : Attribute, IAsyncActionFilt
         // some action
 
         await next();
+    }
+
+    public async ValueTask<object?> InvokeAsync(EndpointFilterInvocationContext context, EndpointFilterDelegate next)
+    {
+        // some action
+        Console.WriteLine("Filter works");
+        return await next(context);
     }
 }
