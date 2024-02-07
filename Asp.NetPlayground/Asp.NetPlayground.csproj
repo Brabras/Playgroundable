@@ -19,4 +19,13 @@
       <ProjectReference Include="..\Infrastructure.Seedwork\Infrastructure.Seedwork.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Update="Content\first.jpeg">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="Content\second.jpg">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>

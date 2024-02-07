@@ -6,47 +6,48 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Http.Metadata;
+using Microsoft.Extensions.FileProviders;
 using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var services = builder.Services;
 
-services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-        .AddCookie(options =>
-        {
-            options.LoginPath         = "/login";
-            options.Cookie.Name       = "brabras-api";
-            options.ExpireTimeSpan    = TimeSpan.FromMinutes(10);
-            options.SlidingExpiration = true;
+// services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+//         .AddCookie(options =>
+//         {
+//             options.LoginPath         = "/login";
+//             options.Cookie.Name       = "brabras-api";
+//             options.ExpireTimeSpan    = TimeSpan.FromMinutes(10);
+//             options.SlidingExpiration = true;
+//
+//             options.Events = new CookieAuthenticationEvents
+//             {
+//                 OnRedirectToLogin = redirectContext =>
+//                 {
+//                     redirectContext.HttpContext.Response.StatusCode = 401;
+//                     return Task.CompletedTask;
+//                 }
+//             };
+//         });
+// services.AddAuthorization();
+//
+// var configuration = builder.Configuration;
+//
+// var redisConnectionString = configuration.GetConnectionString("Redis");
+// var redis                 = ConnectionMultiplexer.Connect(redisConnectionString!);
+//
+// services.AddDataProtection()
+//         .SetApplicationName("brabras-api")
+//         .PersistKeysToStackExchangeRedis(redis, "DataProtectionKeys");
+//
+// services.AddStackExchangeRedisCache(options =>
+// {
+//     options.Configuration = redisConnectionString;
+//     options.InstanceName  = "brabras-api";
+// });
 
-            options.Events = new CookieAuthenticationEvents
-            {
-                OnRedirectToLogin = redirectContext =>
-                {
-                    redirectContext.HttpContext.Response.StatusCode = 401;
-                    return Task.CompletedTask;
-                }
-            };
-        });
-services.AddAuthorization();
-
-var configuration = builder.Configuration;
-
-var redisConnectionString = configuration.GetConnectionString("Redis");
-var redis                 = ConnectionMultiplexer.Connect(redisConnectionString!);
-
-services.AddDataProtection()
-        .SetApplicationName("brabras-api")
-        .PersistKeysToStackExchangeRedis(redis, "DataProtectionKeys");
-
-services.AddStackExchangeRedisCache(options =>
-{
-    options.Configuration = redisConnectionString;
-    options.InstanceName  = "brabras-api";
-});
-
-services.AddMvcCore(options => //
+services.AddMvc(options => //
 {
     options.Filters.Add<DbSessionAttributeActionFilter>();
 });
@@ -98,10 +99,10 @@ app.Map("/", [Authorize]() => "Hello World!");
 
 app.MapGet("/routes", [Authorize](IEnumerable<EndpointDataSource> endpointSources, HttpContext context) =>
 {
-    var claims = string.Join(" ",context.User.Claims);
-    var ans    =  string.Join("\n", endpointSources.SelectMany(source => source.Endpoints));
+    var claims = string.Join(" ", context.User.Claims);
+    var ans    = string.Join("\n", endpointSources.SelectMany(source => source.Endpoints));
 
-    return string.Concat(ans,"\n", claims);
+    return string.Concat(ans, "\n", claims);
 });
 
 app.Run();

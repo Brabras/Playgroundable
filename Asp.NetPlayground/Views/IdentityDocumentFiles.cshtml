@@ -1,0 +1,45 @@
+@model Asp.NetPlayground.Model.IdentityDocumentPicturesModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FATCA form</title>
+    <style>
+        body {
+            font-family: "Times New Roman", serif;
+            font-size: 13px;
+        }
+
+
+        .whitespace {
+            width: 100%;
+            height: 20px;
+        }
+
+        .bordered-table tr,
+        .bordered-table td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        
+    </style>
+</head>
+
+<body>
+<div class="whitespace"></div>
+@{
+    var firstImgSrc  = String.Format($"data:{Model.FrontSideContentType};base64,{Model.FrontSideBytes}");
+    var secondImgSrc = String.Format($"data:{Model.BackSideContentType};base64,{Model.BackSideBytes}");
+}
+<div>
+    <img src="@firstImgSrc"/>
+
+</div>
+<div>
+    <img src="@secondImgSrc"/>
+
+</div>
+
+</body>
+</html>
