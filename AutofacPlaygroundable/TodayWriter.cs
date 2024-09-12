@@ -1,12 +1,12 @@
-﻿namespace AutofacPlayGround
+﻿namespace AutofacPlaygroundable
 {
     public class TodayWriter : IDateWriter
     {
         public int Number { get; private set; }
 
-        private readonly ConsoleOutput _output;
+        private readonly IOutput _output;
 
-        public TodayWriter(ConsoleOutput output)
+        public TodayWriter(IOutput output)
         {
             _output = output;
         }

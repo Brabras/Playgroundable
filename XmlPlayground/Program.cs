@@ -1,80 +1,98 @@
-﻿using System.Reflection;
-using System.Text;
+﻿using System.Text;
 using System.Xml;
-using System.Xml.Schema;
 using System.Xml.Xsl;
-using XmlPlayground.Content;
+using XmlPlayground;
 
-var transform = Assembly.GetExecutingAssembly().GetManifestResourceStream("XmlPlayground.Content.UNTransform.xslt");
-var xml = Assembly.GetExecutingAssembly().GetManifestResourceStream("XmlPlayground.Content.UN.xml");
+const string EufsPath = "Content/31.07.24_EUFS.xml";
+const string OfacPath = "Content/31.07.24_OFAC.xml";
+const string UnPath   = "Content/31.07.24_UN.xml";
 
-var xsltArgumentList = new XsltArgumentList();
-xsltArgumentList.AddExtensionObject(CollectorExtensions.Namespace, new CollectorExtensions());
+const string EufsTransformPath = "Content/EUFSTransform.xslt";
+const string OfacTransformPath = "Content/OFACTransform.xslt";
+const string UNTransformPath   = "Content/UNTransform.xslt";
 
-var myXslTrans = new XslCompiledTransform();
-var xsltSettings = new XsltSettings { EnableScript = true };
-
-var sb = new StringBuilder();
-
-var xmlReaderSettings = new XmlReaderSettings
+var dict = new Dictionary<string, string>
 {
-    DtdProcessing = DtdProcessing.Parse
+    { EufsPath, EufsTransformPath },
+    { OfacPath, OfacTransformPath },
+    { UnPath, UNTransformPath }
 };
 
+var iterationCount = 0;
 
-using (var xmlReader = XmlReader.Create(xml!, xmlReaderSettings))
-using (var xmlWriter = XmlWriter.Create(sb))
-using (var xsltReader = XmlReader.Create(transform!))
+while (true)
 {
-    myXslTrans.Load(xsltReader, xsltSettings, null);
-    myXslTrans.Transform(xmlReader, xsltArgumentList, xmlWriter);
-}
-
-var resultPayload = sb.ToString();
-
-var isResultValid = ValidateResult(resultPayload);
-
-if (!isResultValid)
-    Console.WriteLine("Invalid");
-else
-    Console.WriteLine("Valid");
-
-
-static bool ValidateResult(string resultPayload)
-{
-    using (var xsdStream = Assembly.GetExecutingAssembly()
-               .GetManifestResourceStream("XmlPlayground.Content.BlackListSchema.xsd"))
+    foreach (var list in dict)
     {
-        using (var xsdReaderStream = XmlReader.Create(xsdStream!))
-        {
-            var validationSettings = new XmlReaderSettings();
-            validationSettings.Schemas.Add(null, xsdReaderStream);
-            validationSettings.ValidationType = ValidationType.Schema;
-            validationSettings.ValidationEventHandler += BooksSettingsValidationEventHandler!;
+        var xml  = await File.ReadAllTextAsync(Path.Combine(".", list.Key));
+        var xslt = await File.ReadAllTextAsync(Path.Combine(".", list.Value));
 
-            var xmlByteArr = Encoding.Unicode.GetBytes(resultPayload);
-            using (var xmlResultStream = new MemoryStream(xmlByteArr))
-            using (var xmlResultReader = XmlReader.Create(xmlResultStream, validationSettings))
-            {
-                try
-                {
-                    while (xmlResultReader.Read())
-                    {
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    return false;
-                }
-            }
-        }
+        TransformPayload(xslt, xml);
     }
 
-    return true;
+    await Task.Delay(TimeSpan.FromSeconds(1));
+    GC.Collect();
+    Console.WriteLine($"{++iterationCount} Iteration complete");
 }
 
-static void BooksSettingsValidationEventHandler(object sender, ValidationEventArgs e)
+Console.WriteLine("Enter to GC collect");
+Console.ReadLine();
+
+
+Console.WriteLine("Enter to exit");
+Console.ReadLine();
+
+
+static string TransformPayload(string xslt, string xml)
 {
-    throw new Exception(e.Message);
+    var xsltArgumentList = new XsltArgumentList();
+    xsltArgumentList.AddExtensionObject(XsltExtensions.Namespace, new XsltExtensions());
+
+    var myXslTrans   = new XslCompiledTransform(false);
+    var xsltSettings = new XsltSettings { EnableScript = true };
+
+    var sb = new StringBuilder();
+
+    var xmlReaderSettings = new XmlReaderSettings
+    {
+        DtdProcessing = DtdProcessing.Parse
+    };
+
+    var xsltByteArr = Encoding.UTF8.GetBytes(xslt);
+    using (var xsltStream = new MemoryStream(xsltByteArr))
+    using (var xmlReader = XmlReader.Create(new StringReader(xml), xmlReaderSettings))
+    using (var xmlWriter = XmlWriter.Create(sb))
+    using (var xsltReader = XmlReader.Create(xsltStream))
+    {
+        myXslTrans.Load(xsltReader, xsltSettings, null);
+        myXslTrans.Transform(xmlReader, xsltArgumentList, xmlWriter);
+    }
+
+    return sb.ToString();
 }
+
+// static string TransformPayloadSax(string xslt, string xml)
+// {
+//     var processor = new Processor();
+//
+//     processor.RegisterExtensionFunction(new TrimFunction());
+//     processor.RegisterExtensionFunction(new FullNameFunction());
+//     processor.RegisterExtensionFunction(new ConcatFunction());
+//
+//
+//     var xsltByteArr = Encoding.UTF8.GetBytes(xslt);
+//     var xmlByteArr  = Encoding.UTF8.GetBytes(xml);
+//
+//     using var xsltStream = new MemoryStream(xsltByteArr);
+//     using var xmlStream  = new MemoryStream(xmlByteArr);
+//     using var writer     = new StringWriter();
+//
+//     var compiler   = processor.NewXsltCompiler();
+//     var executable = compiler.Compile(xsltStream);
+//
+//     var transformer = executable.Load();
+//     transformer.SetInputStream(xmlStream, new Uri("https://brabras.site"));
+//     var serializer = processor.NewSerializer(writer);
+//     transformer.Run(serializer);
+//     return writer.ToString();
+// }

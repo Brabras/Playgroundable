@@ -10,15 +10,15 @@
         <BlackList>
             <xsl:for-each select="/CONSOLIDATED_LIST/INDIVIDUALS/INDIVIDUAL">
                 <Entry>
-                    <Main>
-                        <xsl:value-of select="ext:FullName(THIRD_NAME, FIRST_NAME, SECOND_NAME, FOURTH_NAME)"/>
-                    </Main>
 
                     <DateOfBirth>
                         <xsl:value-of select="INDIVIDUAL_DATE_OF_BIRTH/DATE"/>
                     </DateOfBirth>
 
                     <Aliases>
+                        <Alias>
+                            <xsl:value-of select="ext:FullName(THIRD_NAME, FIRST_NAME, SECOND_NAME, FOURTH_NAME)"/>
+                        </Alias>
                         <xsl:for-each select="INDIVIDUAL_ALIAS">
                             <xsl:if test="string-length(ALIAS_NAME) &gt; 0">
                                 <Alias>

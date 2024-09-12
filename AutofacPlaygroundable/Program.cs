@@ -19,32 +19,28 @@ builder.RegisterAssemblyModules(Assembly.GetExecutingAssembly());
 //builder.Register(c => new TodayWriter().As<IConfigReader>();
 
 //или так
-//builder.RegisterType<ConfigReader>().As<IConfigReader>().WithParameter("configSectionName", "sectionName");
+builder.RegisterType<ConsoleOutput>().As<IOutput>().WithParameter("configSectionName", "sectionName");
 
+var container = builder.Build();
 // WriteDate();
 //
 // void WriteDate()
 // {
-//     {
-//         //если сервис зареган - создаст, если нет-нет
-//         //var service = scope.ResolveOptional<IService>();
+//     //если сервис зареган - создаст, если нет-нет
+//     //var service = scope.ResolveOptional<IService>();
 //
-//         var writer = Container.Resolve<TodayWriter>();
-//         writer.WriteDate();
-//         Console.WriteLine(writer.Number);
+//     var writer = container.Resolve<TodayWriter>();
+//     writer.WriteDate();
+//     Console.WriteLine(writer.Number);
 //
-//         writer.Rase(5);
+//     writer.Rase(5);
 //
-//         var second = Container.Resolve<TodayWriter>();
-//         Console.WriteLine(second.Number);
-//     }
+//     var second = container.Resolve<TodayWriter>();
+//     Console.WriteLine(second.Number);
 // }
 
-
-var container = builder.Build();
-
 var handler = container.Resolve<CommandHandler>();
-await handler.HandleAsync( new SimpleCommand
+await handler.HandleAsync(new SimpleCommand
 {
     Now = DateTime.Now
 });

@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using AutofacPlayGround;
 using AutofacPlaygroundable.Commands;
 using AutofacPlaygroundable.DomainEvents;
 

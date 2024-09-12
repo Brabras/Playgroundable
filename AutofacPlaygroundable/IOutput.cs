@@ -1,4 +1,4 @@
-﻿namespace AutofacPlayGround
+﻿namespace AutofacPlaygroundable
 {
     public interface IOutput
     {
