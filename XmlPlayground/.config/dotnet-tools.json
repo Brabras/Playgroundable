@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "isRoot": true,
+  "tools": {
+    "saxonhe12netxquery": {
+      "version": "12.5.9.1",
+      "commands": [
+        "SaxonHE12NetXQuery"
+      ]
+    }
+  }
+}
