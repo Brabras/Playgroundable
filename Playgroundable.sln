@@ -26,6 +26,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Asp.NetPlayground", "Asp.Ne
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgsPlayground", "AlgsPlayground\AlgsPlayground.csproj", "{79DA61EE-EE76-41C3-8D0B-6B973F3892CE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatternsPlayground", "PatternsPlayground\PatternsPlayground.csproj", "{C36B5696-BD2C-4892-82A4-25C8F9E4F180}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -84,5 +86,9 @@ Global
 		{79DA61EE-EE76-41C3-8D0B-6B973F3892CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79DA61EE-EE76-41C3-8D0B-6B973F3892CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79DA61EE-EE76-41C3-8D0B-6B973F3892CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C36B5696-BD2C-4892-82A4-25C8F9E4F180}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C36B5696-BD2C-4892-82A4-25C8F9E4F180}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C36B5696-BD2C-4892-82A4-25C8F9E4F180}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C36B5696-BD2C-4892-82A4-25C8F9E4F180}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

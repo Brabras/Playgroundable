@@ -1,0 +1,1 @@
+.\docker-compose.ps1 -action up -extra "-d"
