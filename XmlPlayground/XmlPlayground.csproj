@@ -42,12 +42,6 @@
       <None Remove="Content\sdn_enhanced_copy.xml" />
       <None Remove="Content\sdn_enhanced.xml" />
       <None Remove="Content\eufi.xml" />
-      <None Update="Content\31.07.24_EUFS.xml">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Content\31.07.24_OFAC.xml">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
       <None Update="Content\31.07.24_UN.xml">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
