@@ -1,4 +1,4 @@
-﻿namespace PatternsPlayground;
+﻿namespace PatternsPlayground.Ducks_Strategy_Behavior;
 
 public interface IQuackBehavior
 {

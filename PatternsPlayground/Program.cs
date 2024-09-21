@@ -1,13 +1,35 @@
-﻿using PatternsPlayground.Ducks;
+﻿using PatternsPlayground.Weather_Observer_Behavior;
 
-Console.WriteLine("Hello, World!");
+//
+// #region Behavior-Strategy
+//
+// var mallardDuck = MallardDuck.CreateMallardDuck();
+//
+// mallardDuck.Quack();
+// mallardDuck.Fly();
+// mallardDuck.Display();
+//
+// mallardDuck.SetFlyBehavior(new ReactiveFlying());
+//
+// mallardDuck.Fly();
+//
+// #endregion
 
-var mallardDuck = MallardDuck.CreateMallardDuck();
+#region Behavior-Observer
 
-mallardDuck.Quack();
-mallardDuck.Fly();
-mallardDuck.Display();
+var weatherData = new WeatherData();
 
-mallardDuck.SetFlyBehavior(new ReactiveFlying());
+var currentDataDisplay        = new CurrentStateDisplayObserver();
+var statisticsDisplayObserver = new StatisticsDisplayObserver();
+var futureDisplayObserver     = new FutureDisplayObserver();
 
-mallardDuck.Fly();
+weatherData.RegisterObserver(currentDataDisplay);
+weatherData.RegisterObserver(statisticsDisplayObserver);
+weatherData.RegisterObserver(futureDisplayObserver);
+
+weatherData.MeasurementsChanged();
+weatherData.MeasurementsChanged();
+weatherData.MeasurementsChanged();
+
+
+#endregion

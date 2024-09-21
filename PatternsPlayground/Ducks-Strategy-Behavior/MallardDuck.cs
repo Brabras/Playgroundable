@@ -1,4 +1,4 @@
-﻿namespace PatternsPlayground.Ducks;
+﻿namespace PatternsPlayground.Ducks_Strategy_Behavior;
 
 public sealed class MallardDuck : Duck
 {
