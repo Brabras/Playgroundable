@@ -20,7 +20,10 @@ public class ClientMap : ClassMap<Client>
 
         Id(x => x.Id);
 
-        HasMany(x => x.Wallets);
+        HasMany(x => x.Wallets)
+            .Inverse()
+            .Cascade.SaveUpdate()
+            .Fetch.Select();
         
         Map(x => x.Value);
     }

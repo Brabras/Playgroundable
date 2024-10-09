@@ -4,7 +4,7 @@
     {
         public void Write(string content)
         {
-            Write(content);
+            Console.WriteLine(content);
         }
     }
 }

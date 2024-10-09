@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using FFMpegCore;
+﻿using FFMpegCore;
 using FFMpegCore.Arguments;
 using FFMpegCore.Enums;
 using FFMpegCore.Pipes;
@@ -8,9 +7,9 @@ namespace FfmpegPlayground;
 
 static class Program
 {
-    static async Task Main(string[] args)
+    static async Task Main()
     {
-        var inputPath = "../../../TestVideos/TestVideoBefore.mp4";
+        var inputPath  = "../../../TestVideos/TestVideoBefore.mp4";
         var outputPath = "../../../TestVideos/TestVideoAfter.mp4";
 
         var text1 = @"
@@ -39,7 +38,7 @@ static class Program
 
             var targetSize = VideoSize.Original;
 
-            var info = await FFProbe.AnalyseAsync(inputPath);
+            var info        = await FFProbe.AnalyseAsync(inputPath);
             var videoStream = info.PrimaryVideoStream;
 
             if (videoStream is not null)
@@ -50,51 +49,51 @@ static class Program
                 Console.WriteLine($"PixelFormat: {videoStream.PixelFormat}");
 
                 var origHeight = videoStream.Height;
-                var origWidth = videoStream.Width;
+                var origWidth  = videoStream.Width;
                 if (origHeight * origWidth > 921_600)
                     targetSize = VideoSize.Hd;
             }
 
             await FFMpegArguments
-                .FromPipeInput(new StreamPipeSource(inputStream))
-                .OutputToFile(outputPath, true, options => options
-                    .ForceFormat("mp4")
-                    .WithVideoFilters(filterOptions => filterOptions
-                        .Scale(targetSize)
-                        .DrawText(DrawTextOptions.Create($"{text1}", "Arial")
-                            .WithParameter("box", "1")
-                            .WithParameter("boxcolor", "black@0.5")
-                            .WithParameter("fontcolor", "white")
-                            .WithParameter("fontsize", "24")
-                            .WithParameter("x", "0")
-                            .WithParameter("y", "0"))
-                        .DrawText(DrawTextOptions.Create($"{text2}", "Arial")
-                            .WithParameter("enable", "'between(t, 3, 6)'")
-                            .WithParameter("box", "1")
-                            .WithParameter("boxcolor", "black@0.5")
-                            .WithParameter("fontcolor", "white")
-                            .WithParameter("fontsize", "24")
-                            .WithParameter("x", "(w-text_w)/2")
-                            .WithParameter("y", "0"))
-                        .DrawText(DrawTextOptions.Create($"{text3}", "Arial")
-                            .WithParameter("enable", "'between(t, 6, 9)'")
-                            .WithParameter("box", "1")
-                            .WithParameter("boxcolor", "black@0.5") //asdas//
-                            .WithParameter("fontcolor", "white")
-                            .WithParameter("fontsize", "24")
-                            .WithParameter("x", "(w-text_w)/2")
-                            .WithParameter("y", "0"))
-                        .DrawText(DrawTextOptions.Create($"{text4}", "Arial")
-                            .WithParameter("enable", "'between(t, 9, 12)'")
-                            .WithParameter("box", "1")
-                            .WithParameter("boxcolor", "black@0.5")
-                            .WithParameter("fontcolor", "white")
-                            .WithParameter("fontsize", "24")
-                            .WithParameter("x", "(w-text_w)/2")
-                            .WithParameter("y", "0")
-                        ))
-                    .WithCustomArgument("-an")
-                ).ProcessAsynchronously();
+                  .FromPipeInput(new StreamPipeSource(inputStream))
+                  .OutputToFile(outputPath, true, options => options
+                                                             .ForceFormat("mp4")
+                                                             .WithVideoFilters(filterOptions => filterOptions
+                                                                                                .Scale(targetSize)
+                                                                                                .DrawText(DrawTextOptions.Create($"{text1}", "Arial")
+                                                                                                                         .WithParameter("box", "1")
+                                                                                                                         .WithParameter("boxcolor", "black@0.5")
+                                                                                                                         .WithParameter("fontcolor", "white")
+                                                                                                                         .WithParameter("fontsize", "24")
+                                                                                                                         .WithParameter("x", "0")
+                                                                                                                         .WithParameter("y", "0"))
+                                                                                                .DrawText(DrawTextOptions.Create($"{text2}", "Arial")
+                                                                                                                         .WithParameter("enable", "'between(t, 3, 6)'")
+                                                                                                                         .WithParameter("box", "1")
+                                                                                                                         .WithParameter("boxcolor", "black@0.5")
+                                                                                                                         .WithParameter("fontcolor", "white")
+                                                                                                                         .WithParameter("fontsize", "24")
+                                                                                                                         .WithParameter("x", "(w-text_w)/2")
+                                                                                                                         .WithParameter("y", "0"))
+                                                                                                .DrawText(DrawTextOptions.Create($"{text3}", "Arial")
+                                                                                                                         .WithParameter("enable", "'between(t, 6, 9)'")
+                                                                                                                         .WithParameter("box", "1")
+                                                                                                                         .WithParameter("boxcolor", "black@0.5") //asdas//
+                                                                                                                         .WithParameter("fontcolor", "white")
+                                                                                                                         .WithParameter("fontsize", "24")
+                                                                                                                         .WithParameter("x", "(w-text_w)/2")
+                                                                                                                         .WithParameter("y", "0"))
+                                                                                                .DrawText(DrawTextOptions.Create($"{text4}", "Arial")
+                                                                                                                         .WithParameter("enable", "'between(t, 9, 12)'")
+                                                                                                                         .WithParameter("box", "1")
+                                                                                                                         .WithParameter("boxcolor", "black@0.5")
+                                                                                                                         .WithParameter("fontcolor", "white")
+                                                                                                                         .WithParameter("fontsize", "24")
+                                                                                                                         .WithParameter("x", "(w-text_w)/2")
+                                                                                                                         .WithParameter("y", "0")
+                                                                                                         ))
+                                                             .WithCustomArgument("-an")
+                               ).ProcessAsynchronously();
         }
         catch (Exception e)
         {

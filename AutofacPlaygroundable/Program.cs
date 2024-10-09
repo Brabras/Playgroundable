@@ -6,6 +6,7 @@ using AutofacPlaygroundable.Commands;
 using Microsoft.Extensions.DependencyInjection;
 
 var serviceCollection = new ServiceCollection();
+if (serviceCollection == null) throw new ArgumentNullException(nameof(serviceCollection));
 
 var builder = new ContainerBuilder();
 

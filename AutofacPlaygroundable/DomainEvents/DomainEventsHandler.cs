@@ -24,6 +24,7 @@ public class DomainEventsHandler
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex);
             }
         }
     }

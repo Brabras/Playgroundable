@@ -7,20 +7,20 @@ public class CombinationTest
 {
     public class SCard
     {
-        private static readonly Random random = new Random();
-        public static readonly string[] ranks = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A" };
-        public static readonly string[] suits = { "\u2660", "\u2665", "\u2666", "\u2663" };
+        private static readonly Random Random = new Random();
+        public static readonly string[] Ranks = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A" };
+        public static readonly string[] Suits = { "\u2660", "\u2665", "\u2666", "\u2663" };
 
         public string Rank { get; set; }
         public string Suit { get; set; }
 
         public SCard()
         {
-            int rankIndex = random.Next(0, 13); // случайный индекс для значения
-            int suitIndex = random.Next(0, 4);  // случайный индекс для масти
+            int rankIndex = Random.Next(0, 13); // случайный индекс для значения
+            int suitIndex = Random.Next(0, 4);  // случайный индекс для масти
 
-            Rank = ranks[rankIndex];
-            Suit = suits[suitIndex];
+            Rank = Ranks[rankIndex];
+            Suit = Suits[suitIndex];
         }
 
         public override string ToString()
@@ -60,7 +60,7 @@ public class CombinationTest
 
         foreach (var card in cards)
         {
-            powerCounter += power[card.Rank];
+            powerCounter += Power[card.Rank];
             var currentRank = card.Rank;
 
             if (card.Suit.Equals(currentSuit))
@@ -179,8 +179,9 @@ public class CombinationTest
 
     private bool IsFullHouse(List<SCard> hand)
     {
-        var grouped = hand.GroupBy(card => card.Rank);
-        return grouped.Any(group => group.Count() == 3) && grouped.Any(group => group.Count() == 2);
+        var grouped    = hand.GroupBy(card => card.Rank);
+        var enumerable = grouped as IGrouping<string, SCard>[] ?? grouped.ToArray();
+        return enumerable.Any(group => group.Count() == 3) && enumerable.Any(group => group.Count() == 2);
     }
 
     private bool IsFlush(List<SCard> hand)
@@ -190,11 +191,11 @@ public class CombinationTest
 
     private bool IsStraight(List<SCard> hand)
     {
-        var ranks = hand.Select(card => card.Rank).Distinct().OrderBy(rank => Array.IndexOf(SCard.ranks, rank)).ToList();
+        var ranks = hand.Select(card => card.Rank).Distinct().OrderBy(rank => Array.IndexOf(SCard.Ranks, rank)).ToList();
         if (ranks.Count < 5) return false;
         for (int i = 0; i < ranks.Count - 1; i++)
         {
-            if (Array.IndexOf(SCard.ranks, ranks[i + 1]) - Array.IndexOf(SCard.ranks, ranks[i]) != 1)
+            if (Array.IndexOf(SCard.Ranks, ranks[i + 1]) - Array.IndexOf(SCard.Ranks, ranks[i]) != 1)
             {
                 return false;
             }
@@ -223,7 +224,7 @@ public class CombinationTest
 
 
     //тут я еще не знал о хешах)
-    private static readonly Dictionary<string, int> power = new()
+    private static readonly Dictionary<string, int> Power = new()
     {
         { "2", 1 },
         { "3", 3 },

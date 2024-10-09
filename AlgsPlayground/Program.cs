@@ -23,11 +23,11 @@ class DijkstraAlgorithm
     }
 
     // Функция для нахождения вершины с минимальным расстоянием
-    static int MinDistance(int[] dist, bool[] sptSet, int V)
+    static int MinDistance(int[] dist, bool[] sptSet, int z)
     {
         int min = int.MaxValue, minIndex = -1;
 
-        for (int v = 0; v < V; v++)
+        for (int v = 0; v < z; v++)
         {
             if (!sptSet[v] && dist[v] < min)
             {
@@ -40,11 +40,11 @@ class DijkstraAlgorithm
     }
 
     // Функция для вывода результатов с буквенными нодами
-    static void PrintSolution(int[] dist, int V, char[] nodes)
+    static void PrintSolution(int[] dist, int v, char[] nodes)
     {
         Console.WriteLine("Нода \t Расстояние от источника \t Путь");
 
-        for (int i = 0; i < V; i++)
+        for (int i = 0; i < v; i++)
         {
             Console.Write($"{nodes[i]} \t\t {dist[i]} \t\t\t ");
             PrintPath(0, i, nodes);

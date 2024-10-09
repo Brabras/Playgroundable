@@ -2,7 +2,7 @@
 
 public interface ISubject
 {
-    void RegisterObserver(IDisplayObserver displayObserver);
-    void UnregisterObserver(IDisplayObserver displayObserver);
+    void RegisterObserver(IObserver observer);
+    void UnregisterObserver(IObserver observer);
     void NotifyObservers();
 }

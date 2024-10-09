@@ -28,6 +28,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgsPlayground", "AlgsPlayg
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatternsPlayground", "PatternsPlayground\PatternsPlayground.csproj", "{C36B5696-BD2C-4892-82A4-25C8F9E4F180}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SourceGeneratorsPlayground", "SourceGeneratorsPlayground\SourceGeneratorsPlayground.csproj", "{9151545A-B782-4334-9230-ADD25F7CA62B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SourceGenerator", "SourceGenerator\SourceGenerator.csproj", "{06BA653F-4A8A-417F-AF06-C31E7436A813}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -90,5 +94,13 @@ Global
 		{C36B5696-BD2C-4892-82A4-25C8F9E4F180}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C36B5696-BD2C-4892-82A4-25C8F9E4F180}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C36B5696-BD2C-4892-82A4-25C8F9E4F180}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9151545A-B782-4334-9230-ADD25F7CA62B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9151545A-B782-4334-9230-ADD25F7CA62B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9151545A-B782-4334-9230-ADD25F7CA62B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9151545A-B782-4334-9230-ADD25F7CA62B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06BA653F-4A8A-417F-AF06-C31E7436A813}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06BA653F-4A8A-417F-AF06-C31E7436A813}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06BA653F-4A8A-417F-AF06-C31E7436A813}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06BA653F-4A8A-417F-AF06-C31E7436A813}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

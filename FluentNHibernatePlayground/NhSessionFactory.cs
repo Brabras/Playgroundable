@@ -1,6 +1,5 @@
 ﻿using Infrastructure.DataAccess;
 using NHibernate;
-using NHibernate.Event;
 
 namespace FluentNHibernatePlayground;
 
@@ -10,14 +9,14 @@ public static class NhSessionFactory
     {
         return new SessionFactoryBuilder()
                .AddFluentMappingsFrom("FluentNHibernatePlayground")
-               .ExposeConfiguration(cfg =>
-                                    {
-
-                                        cfg.SetListener(ListenerType.Load, new CustomEventListener());
-                                    }
-                                        
-                                        // cfg.SetInterceptor(new CustomInterceptor())
-                                        )
+               // .ExposeConfiguration(cfg =>
+               //                      {
+               //
+               //                          cfg.SetListener(ListenerType.Load, new CustomEventListener());
+               //                      }
+               //                          
+               //                          // cfg.SetInterceptor(new CustomInterceptor())
+               //                          )
                .Build();
     }
 }

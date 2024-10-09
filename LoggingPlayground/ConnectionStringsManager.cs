@@ -15,7 +15,7 @@ public static class ConnectionStringsManager
     {
         foreach (var configurationSection in configuration.GetSection("ConnectionStrings").GetChildren())
         {
-            ConnectionStrings[configurationSection.Key] = configurationSection.Value;
+            if (configurationSection.Value != null) ConnectionStrings[configurationSection.Key] = configurationSection.Value;
         }
     }
 

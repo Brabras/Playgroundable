@@ -4,36 +4,46 @@ public sealed class WeatherData : ISubject
 {
     private readonly Random _random = new();
 
-    private readonly List<IDisplayObserver> _observers = new();
+    private readonly List<IObserver> _observers = new();
+
+    public float Temperature { get; private set; }
+    public float Humidity { get; private set; }
+    public float Pressure { get; private set; }
+
+    public WeatherData()
+    {
+        Temperature = GetTemperature();
+        Humidity    = GetHumidity();
+        Pressure    = GetPressure();
+    }
 
     public void MeasurementsChanged()
     {
+        Temperature = GetTemperature();
+        Humidity    = GetHumidity();
+        Pressure    = GetPressure();
+
         NotifyObservers();
     }
 
-    public void RegisterObserver(IDisplayObserver displayObserver)
+    public void RegisterObserver(IObserver observer)
     {
-        _observers.Add(displayObserver);
+        _observers.Add(observer);
     }
 
-    public void UnregisterObserver(IDisplayObserver displayObserver)
+    public void UnregisterObserver(IObserver observer)
     {
-        _observers.Remove(displayObserver);
+        _observers.Remove(observer);
     }
 
     public void NotifyObservers()
     {
-        var temp     = GetTemperature();
-        var humidity = GetHumidity();
-        var pressure = GetPressure();
-
-        var data = WeatherInfo.Create(temp, humidity, pressure);
         foreach (var observer in _observers)
         {
-            observer.Update(data);
+            observer.Update();
         }
     }
-    
+
     private float GetTemperature()
     {
         return _random.Next(-20, 51);

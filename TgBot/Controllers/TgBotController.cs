@@ -14,8 +14,11 @@ public class TelegramController : ControllerBase
         var botClient = new TelegramBotClient("5818909579:AAHjXutJHotzfLBzLH3UqMN77t19y8zoATk");
         if (update.Type == Telegram.Bot.Types.Enums.UpdateType.ChannelPost)
         {
-            var messageId = update.ChannelPost.MessageId;
-            await botClient.DeleteMessageAsync(-1001521736518, messageId);
+            if (update.ChannelPost != null)
+            {
+                var messageId = update.ChannelPost.MessageId;
+                await botClient.DeleteMessageAsync(-1001521736518, messageId);
+            }
         }
         
 

@@ -3,19 +3,19 @@ using System.Xml;
 using System.Xml.Xsl;
 using XmlPlayground;
 
-const string EufsPath = "Content/31.07.24_EUFS.xml";
-const string OfacPath = "Content/31.07.24_OFAC.xml";
-const string UnPath   = "Content/31.07.24_UN.xml";
+const string eufsPath = "Content/31.07.24_EUFS.xml";
+const string ofacPath = "Content/31.07.24_OFAC.xml";
+const string unPath   = "Content/31.07.24_UN.xml";
 
-const string EufsTransformPath = "Content/EUFSTransform.xslt";
-const string OfacTransformPath = "Content/OFACTransform.xslt";
-const string UNTransformPath   = "Content/UNTransform.xslt";
+const string eufsTransformPath = "Content/EUFSTransform.xslt";
+const string ofacTransformPath = "Content/OFACTransform.xslt";
+const string unTransformPath   = "Content/UNTransform.xslt";
 
 var dict = new Dictionary<string, string>
 {
-    { EufsPath, EufsTransformPath },
-    { OfacPath, OfacTransformPath },
-    { UnPath, UNTransformPath }
+    { eufsPath, eufsTransformPath },
+    { ofacPath, ofacTransformPath },
+    { unPath, unTransformPath }
 };
 
 var iterationCount = 0;
@@ -35,15 +35,7 @@ while (true)
     Console.WriteLine($"{++iterationCount} Iteration complete");
 }
 
-Console.WriteLine("Enter to GC collect");
-Console.ReadLine();
-
-
-Console.WriteLine("Enter to exit");
-Console.ReadLine();
-
-
-static string TransformPayload(string xslt, string xml)
+static void TransformPayload(string xslt, string xml)
 {
     var xsltArgumentList = new XsltArgumentList();
     xsltArgumentList.AddExtensionObject(XsltExtensions.Namespace, new XsltExtensions());
@@ -67,8 +59,6 @@ static string TransformPayload(string xslt, string xml)
         myXslTrans.Load(xsltReader, xsltSettings, null);
         myXslTrans.Transform(xmlReader, xsltArgumentList, xmlWriter);
     }
-
-    return sb.ToString();
 }
 
 // static string TransformPayloadSax(string xslt, string xml)

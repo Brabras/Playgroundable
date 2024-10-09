@@ -2,12 +2,12 @@
 {
     public class ConsoleOutput : IOutput
     {
-        private readonly string ConfigSectionName;
-
-        public ConsoleOutput(string configSectionName)
-        {
-            ConfigSectionName = configSectionName;
-        }
+        // private readonly string _configSectionName;
+        //
+        // public ConsoleOutput(string configSectionName)
+        // {
+        //     _configSectionName = configSectionName;
+        // }
 
         public void Write(string content)
         {

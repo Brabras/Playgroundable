@@ -4,12 +4,12 @@ namespace AutofacPlaygroundable;
 
 public sealed class NewMonitoringMatchEventHandler : DomainEventHandler<NewMonitoringMatchEvent>
 {
-    protected override async Task HandleAsync(NewMonitoringMatchEvent domainEvent, CancellationToken cancellationToken)
+    protected override Task HandleAsync(NewMonitoringMatchEvent domainEvent, CancellationToken cancellationToken)
     {
         var notificationText = CreateMonitoringListMatchMessage(domainEvent.Match);
 
         Console.WriteLine(notificationText);
-                        
+        return Task.CompletedTask;
     }
 
     private static string CreateMonitoringListMatchMessage(long match)

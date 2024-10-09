@@ -2,6 +2,7 @@ using LoggingPlayground;
 using Microsoft.Extensions.Configuration;
 using Serilog;
 
+
 var configurationBuilder = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json");
 
@@ -13,6 +14,6 @@ ConnectionStringsManager.ReadFromConfiguration(configuration);
 
 for (int i = 0; i < 150; i++)
 {
-    Log.Logger.Information("Тестовый лог #{1}", i);
+    Log.Logger.Information("Тестовый лог #{i}", i);
 }
 
