@@ -13,6 +13,6 @@ public partial class CarModel : INotifyPropertyChanged
     public event PropertyChangedEventHandler? PropertyChanged;
 }
 
-public class Aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+public class Aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasdasd
 {
 }
