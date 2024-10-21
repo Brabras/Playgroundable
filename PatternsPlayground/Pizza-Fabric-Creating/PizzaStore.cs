@@ -22,6 +22,7 @@ public abstract class PizzaStore
     }
     
     // public abstract Pizza CreatePizza(PizzaType type); - был бы Фабричным методом, но сейчас имеем Абстрактную фабрику IPizzaIngredientFactory
+    // т.е. Фабричный метод создает через наследование, а абстрактная фабрика через композицию
 }
 
 public sealed class NyPizzaStore: PizzaStore
